@@ -1,10 +1,10 @@
-# Data and code to reproduce figures and tables in Resolving Discrepancies in Compute-Optimal Scaling of Language Models
+# Resolving Discrepancies in Compute-Optimal Scaling of Language Models: Data and code
 
-Code and data to reproduce the figures and tables in the paper "Resolving Discrepancies in Compute-Optimal Scaling of Language Models", by Tomer Porian, Mithcell Wortsman, Jenia Jitsev, Ludwig Schmidt, and Yair Carmon.
+This repository contains the data and code to reproduce the figures and tables in the paper "Resolving Discrepancies in Compute-Optimal Scaling of Language Models", by Tomer Porian, Mithcell Wortsman, Jenia Jitsev, Ludwig Schmidt, and Yair Carmon.
 
 ## Folder structure
-- `data/experiment_results.pickle.xz`: Contains the a zipped file with the experiments results.
-- `data/summary*`: Files containing the analyzed results.
+- `data/experiment_results.pickle.xz`: Contains the a pandas dataframe with the experiment results - see "data structure" below.
+- `data/summary*`: Files containing the data analysis results (can be reproduced by running `make_paper.ipynb`).
 - `data.py`: Functions to load and enrich the analysis data.
 - `analysis.py`: Includes the main functions to analyze the results, such as fitting compute-optimal power laws.
 - `plotting.py`: Functions to plot each sub figure in main plots will be stored here.
@@ -15,7 +15,7 @@ Code and data to reproduce the figures and tables in the paper "Resolving Discre
 - `requirements.txt`: Required packages to run the code.
 
 ## Data structure
-We provide a pandas dataframe with the results of the experiments. For ensuring compactness and anonymity, we extract the relavant information from the raw logs. Each row represents a separate training run.
+We provide a pandas dataframe with the results of the experiments. For compactness, we extract the relavant information from the raw logs. Each row represents a separate training run.
 
 ### Important columns
 - `hparams`: Whether we used tuned hyperparameters or not.
