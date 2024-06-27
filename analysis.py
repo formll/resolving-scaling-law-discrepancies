@@ -333,7 +333,7 @@ def predict_and_estimate_cost(df, predict_targets, confidence_level=0.05, anytim
             df, flop_vals=flop_vals, seed_noise=seed_noise, **predict_args)
         if start_flop is None:
             start_flop = optimal_pairs['flops'].min()
-        fit_results = fit_compute_optimal_power_laws(optimal_pairs.query('flops >= @start_flop'), data.query('flops >= @start_flop'), fit_loss=False)
+        fit_results = fit_compute_optimal_power_laws(optimal_pairs.query('flops > @start_flop'), data.query('flops > @start_flop'), fit_loss=False)
         # extract the prediction
         def extract_single_prediction(fit_dict):
             pred = dict(exponent=fit_dict['n_exponent'], coef=fit_dict['n_coef'])
@@ -540,9 +540,9 @@ def fit_l_star_vs_N_for_M(df, smoothed=False):
     return fits
 
 
-def preform_analysis_with_sweep_data(summary_df, sweep_fit):
+def preform_analysis_with_sweep_data(summary_df, sweep_fit, omit_first=False):
     df = summary_df.copy()
-    data = df.iloc[-1]['data']
+    data = df['data']
     data_sweep = data[['flops']].copy()
     loss_interp = [None] * len(data_sweep)
     loss_orig = [None] * len(data_sweep)
@@ -566,7 +566,7 @@ def preform_analysis_with_sweep_data(summary_df, sweep_fit):
         if len(df_) <= 2:
             continue
         star_ind_, star_std_, noised_stars_, interp_, loss_interp_, _, _ = interpolation(df_, (len(df_) - 1) * 100, 1000, RW_SEED_CONFIG, 0.33, 100, 'add_seed_noise', 'n')
-        if star_std_ is not None and i > 0:
+        if star_std_ is not None and (i>0 or not omit_first):
             bs_list.append((c, noised_stars_))
         optimal_n_std[i] = star_std_
         n_interp_list[i] = interp_
@@ -581,7 +581,7 @@ def preform_analysis_with_sweep_data(summary_df, sweep_fit):
     bootstrap_samples = [pd.DataFrame([(bs_list[j][0], bs_list[j][1][i]) for j in range(len(bs_list))], columns=['c', 'n']) for i in range(min_len)]
     fit_results_bootstrap = [power_law_fit(bootstrap_samples[i], 'c', 'n') for i in range(min_len)]
     df = pd.DataFrame([(c, np.median(n_stars)) for (c, n_stars) in bs_list if (c, n_stars) is not None], columns=['c', 'n'])
-    df['n_star_std'] = [std_ for std_ in optimal_n_std if std_ is not None][1:]
+    df['n_star_std'] = [std_ for std_ in optimal_n_std if std_ is not None][int(omit_first):]
     fit_results = power_law_fit(df, 'c', 'n', weighted=True)
    
     data_sweep['loss_interp'] = loss_interp

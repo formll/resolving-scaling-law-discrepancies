@@ -543,7 +543,7 @@ def power_laws_with_tuning_data_plot(tuning_fit_results, fit_results_bootstrap, 
 
 
 def isoflop_curves_ideal_plot(summary_df, tuning_data):
-    data, optimal_pairs = summary_df.iloc[-1][['data', 'optimal_pairs']]
+    data, optimal_pairs = summary_df[['data', 'optimal_pairs']]
     isoflop_curves_plot(data, optimal_pairs,  return_min_max_loss=True, min_multiplier=2, tuning_data=tuning_data)
     handles = []
     labels = []
