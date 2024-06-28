@@ -1,6 +1,6 @@
 # Resolving Discrepancies in Compute-Optimal Scaling of Language Models: Data and code
 
-This repository contains the data and code to reproduce the figures and tables in the paper "Resolving Discrepancies in Compute-Optimal Scaling of Language Models", by Tomer Porian, Mithcell Wortsman, Jenia Jitsev, Ludwig Schmidt, and Yair Carmon.
+This repository contains the data and code to reproduce the figures and tables in the paper ["Resolving Discrepancies in Compute-Optimal Scaling of Language Models"](https://arxiv.org/abs/2406.19146), by Tomer Porian, Mithcell Wortsman, Jenia Jitsev, Ludwig Schmidt, and Yair Carmon.
 
 ## Folder structure
 - `data/experiment_results.pickle.xz`: Contains the a pandas dataframe with the experiment results - see "data structure" below.
