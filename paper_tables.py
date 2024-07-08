@@ -7,8 +7,8 @@ def extract_CI(fit_dict, flop_vals, key='n', conf_level = 0.05): # as in figure 
     fit_dicts_bootstrap = fit_dict.get('bootstrap_weighted', None)
     key_coef, key_exponent = f'{key}_coef', f'{key}_exponent'
     if fit_dicts_bootstrap is not None:
-        fit_vals_bootstrap = [fd[key_coef] * flops_grid ** fd[key_exponent] for fd in fit_dicts_bootstrap]
-        exponents_bootstrap = [fd[key_exponent] for fd in fit_dicts_bootstrap]
+        fit_vals_bootstrap = [fd[key_coef] * flops_grid ** fd[key_exponent] for fd in fit_dicts_bootstrap if key_coef in fd]
+        exponents_bootstrap = [fd[key_exponent] for fd in fit_dicts_bootstrap if key_coef in fd]
 
         conf_int_lower = np.quantile(fit_vals_bootstrap, conf_level / 2, axis=0)
         conf_int_upper = np.quantile(fit_vals_bootstrap, 1 - conf_level / 2, axis=0)

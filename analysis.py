@@ -332,7 +332,7 @@ def predict_and_estimate_cost(df, predict_targets, confidence_level=0.05, anytim
         data, optimal_pairs, max_loss, min_loss = interp_flop(
             df, flop_vals=flop_vals, seed_noise=seed_noise, **predict_args)
         if start_flop is None:
-            start_flop = optimal_pairs['flops'].min()
+            start_flop = optimal_pairs['flops'].min() / 2
         fit_results = fit_compute_optimal_power_laws(optimal_pairs.query('flops > @start_flop'), data.query('flops > @start_flop'), fit_loss=False)
         # extract the prediction
         def extract_single_prediction(fit_dict):

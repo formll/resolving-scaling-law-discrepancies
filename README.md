@@ -23,9 +23,10 @@ We provide a pandas dataframe with the results of the experiments. For compactne
 - `decay`: Decay settings applied during training - either constant, Chinchilla decay or cosine decay with long total budget.
 - `dataset`: Either RefinedWeb or OpenWebText2 - the two datasets used in the experiments.
 - `train/loss`: Each entry in this column is the logged training loss.
-- `val/loss`: Similarly, each entry in this column is the logged validation loss. 
+- `val/loss`: Similarly, each entry in this column is the logged validation loss.
+- `ckpt_path`: Path to the directory containing the model checkpoint on [Hugging Face](https://huggingface.co/formll/resolving-scaling-law-discrepancies).
 
-### Additional configurations
+### Additional columns
 - `width`
 - `depth`
 - `val/loss_std`
@@ -47,7 +48,20 @@ We provide a pandas dataframe with the results of the experiments. For compactne
 - `z_loss_coefficient`
 - `bs`
 - `independent_wd`
-
+- `max_step`
 
 ## Getting started
 Run `make_paper.ipynb` to reproduce the experiments.
+
+## Model checkpoints
+In each of our training runs we have saved model checkpoints upon reaching pre-specified training FLOP values. We share these checkpoints on [Hugging Face](https://huggingface.co/formll/resolving-scaling-law-discrepancies).
+
+## Citation
+```
+@article{porian2024resolving,
+  title={Resolving Discrepancies in Compute-Optimal Scaling of Language Models},
+  author={Porian, Tomer and Wortsman, Mitchell and Jitsev, Jenia and Schmidt, Ludwig and Carmon, Yair},
+  journal={arXiv:2406.19146},
+  year={2024}
+}
+```

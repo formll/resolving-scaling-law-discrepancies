@@ -38,7 +38,7 @@ CONFIG_DICT_LABEL = {
     ('rw', 'tuned', 'short', 'const', 'standard', 'val'): 'Optimizer tuning (no decay)',
     ('rw', 'tuned', 'short', 'const', 'standard', 'train'): 'Optimizer tuning (no decay) - train',
     ('rw', 'tuned', 'long', 'const', 'kaplan', 'train'): '', # kaplan tuned
-    ('rw', 'base', 'long', 'kaplan', 'attention', 'train'): 'Reproducing Kaplan et al.',
+    ('rw', 'base', 'long', 'kaplan', 'attention', 'train'): 'Counting last layer\nand attention FLOPs',
     ('rw', 'base', 'short', 'kaplan', 'attention', 'train'): 'Correcting warmup',
     ('rw', 'base', 'short', 'chinchilla', 'attention', 'train'): 'Cosine decay',
     ('rw', 'tuned', 'short', 'const', 'attention', 'train'): 'Optimizer tuning (no decay)',
@@ -125,3 +125,4 @@ SEED_ARGS = {k:RW_SEED_CONFIG for k in CONFIG_DICT_COLOR}
 SEED_ARGS.update({('owt2', b, c, d, e, f): OWT2_SEED_CONFIG for _, b, c, d, e, f in CONFIG_DICT_COLOR})
 
 SEED_ARGS.update({('rw', 'tuned', 'short', 'const', 'standard', 'train'): RW_SEED_CONFIG})
+SEED_ARGS.update({('rw', 'tuned', 'short', 'const', 'kaplan', 'train'): RW_SEED_CONFIG})
