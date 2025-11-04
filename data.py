@@ -46,7 +46,9 @@ def apply_smoothing_filter(df, filter_func, compensate_for_logging_delay=True, k
         if len(row[key]) == 0:
             out.append(None)
             continue
-        filtered = filter_func(row[key].dropna(), **filter_args)
+        x_series = row[key].dropna()
+        x_series.name = key
+        filtered = filter_func(x_series, **filter_args)
         if compensate_for_logging_delay:
             filtered.index = filtered.index - np.diff(filtered.index, prepend=0)/2
         out.append(filtered)
