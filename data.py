@@ -8,7 +8,7 @@ def precise_flops_per_token_chinchilla(width, depth):
     width = width.astype(float)
     depth = depth.astype(float)
 
-    embeddings = 2 * seq_len * width
+    embeddings = 2 * seq_len * vocab_size * width
 
     attention = 2 * 3 * seq_len * (width ** 2)
     kq_logits = 2 * seq_len * seq_len * width
